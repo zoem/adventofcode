@@ -85,7 +85,7 @@ foreach (combinations($list) as $helditems) {
     // in order to win the player must:
     // - always inflict damage on the boss 
     // - not receive any damage or survive at least as many turns as the boss
-    $playerWins = $damBoss > 0 && ($damPlayer == 0 || ($damPlayer > 0 && $newPlayer['hp'] / $damPlayer >= $boss['hp'] / $damBoss));
+    $playerWins = $damBoss > 0 && ($damPlayer == 0 || $newPlayer['hp'] / $damPlayer >= $boss['hp'] / $damBoss);
     
     if ($playerWins && $newPlayer['cost'] < $min) {
         $min = $newPlayer['cost'];
