@@ -66,22 +66,26 @@ foreach ($slots as $slot) {
 $min = 1e6;
 $max = 0;
 
-foreach (combinations($list) as $helditems) {
-    $newPlayer = $player;
-    
+foreach (combinations($list) as $helditems) {    
     if ($helditems[2] == $helditems[3] && $helditems[2] !== $emptySlot) {
         continue;
     }
-    
-    if (count($helditems) < 4) continue;
+
+    $newPlayer = $player;
 
     foreach ($helditems as $i => $item) {
         foreach ($stats as $stat) { 
             $newPlayer[$stat] += $items[$slots[$i]][$item][$stat];
         }
     }
-
-    $playerWins = battle($newPlayer, $boss);
+    
+    $damBoss   = max(0, $newPlayer['damage'] - $boss['armor']);
+    $damPlayer = max(0, $boss['damage'] - $newPlayer['armor']);
+    
+    // in order to win the player must:
+    // - always inflict damage on the boss 
+    // - not receive any damage or survive at least as many turns as the boss
+    $playerWins = $damBoss > 0 && ($damPlayer == 0 || ($damPlayer > 0 && $newPlayer['hp'] / $damPlayer >= $boss['hp'] / $damBoss));
     
     if ($playerWins && $newPlayer['cost'] < $min) {
         $min = $newPlayer['cost'];
@@ -94,23 +98,6 @@ foreach (combinations($list) as $helditems) {
 
 printf('ans#21.1: %u'.PHP_EOL, $min);
 printf('ans#21.2: %u'.PHP_EOL, $max);
-
-function battle($player, $boss) {
-    $playerWins = true;
-
-    while ($player['hp'] > 0 && $boss['hp'] > 0) {
-
-        $boss['hp'] -= ($player['damage'] - $boss['armor']);
-        $playerWins = true;
-
-        if ($boss['hp'] > 0) {
-            $player['hp'] -= ($boss['damage'] - $player['armor']);
-            $playerWins = false;
-        }
-    }
-    
-    return $playerWins;
-}
 
 function combinations($arrays, $i = 0) {
     if (!isset($arrays[$i])) {
