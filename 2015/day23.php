@@ -11,32 +11,24 @@ foreach ($lines as $i => $line) {
     $instructions[] = explode(' ', str_replace(',', '', trim($line)));
 }
 
-function process($registers, $instructions, $debug = false) {
+function process($registers, $instructions) {
     $i = 0;
     
     while ($i < count($instructions)) {
         $d = $instructions[$i];
         
-        if ($debug) echo $i .': ['. implode(',', $registers) .'] '. implode(' ', $d) . PHP_EOL;
+        $jmp = 1;
         
         switch ($d[0]) {
             case 'hlf': $registers[$d[1]] /= 2; break;
             case 'tpl': $registers[$d[1]] *= 3; break;
             case 'inc': $registers[$d[1]]++;    break;
-            case 'jmp': $i += $d[1]; continue 2;
-            case 'jie': 
-                if ($registers[$d[1]] % 2 == 0) {
-                    $i += $d[2]; continue 2;
-                }
-                break;
-            case 'jio': 
-                if ($registers[$d[1]] == 1) {
-                    $i += $d[2]; continue 2;
-                }
-                break;
+            case 'jmp': $jmp = $d[1];           break;
+            case 'jie': $jmp = $registers[$d[1]] % 2 == 0 ? $d[2] : 1; break;
+            case 'jio': $jmp = $registers[$d[1]]     == 1 ? $d[2] : 1; break;
         }
         
-        $i++;
+        $i += $jmp;
     }
     
     return $registers;
