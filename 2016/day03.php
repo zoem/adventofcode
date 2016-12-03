@@ -8,21 +8,13 @@ $splitter = function ($value) {
 
 $horizontal = array_map($splitter, array_filter(explode(PHP_EOL, $input)));
 
-function triangles(array $triangles) : int {
-    $count = 0;
-    foreach ($triangles as $triangle) {
-        sort($triangle);
-        
-        if ($triangle[0] + $triangle[1] > $triangle[2]) {
-            $count++;
-        }
-    }
-    
-    return $count;
-}
+$test = function (array $triangle) {
+    sort($triangle); 
+    return ($triangle[0] + $triangle[1] > $triangle[2]);
+};
 
 // Part 1
-printf('ans#3.1: %u'.PHP_EOL, triangles($horizontal));
+printf('ans#3.1: %u'.PHP_EOL, array_sum(array_map($test, $horizontal)));
 
 // Part 2
 $vertical = array_chunk(array_merge(
@@ -31,4 +23,5 @@ $vertical = array_chunk(array_merge(
     array_column($horizontal, 2)
 ), 3);
 
-printf('ans#3.2: %u'.PHP_EOL, triangles($vertical));
+
+printf('ans#3.2: %u'.PHP_EOL, array_sum(array_map($test, $vertical)));
