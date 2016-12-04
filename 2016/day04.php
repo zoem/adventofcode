@@ -37,17 +37,13 @@ foreach ($rooms as $room) {
     
     $sectorSum += $room['sector'];
     
-    if ($room['sector'] > 26) {
-        $shift = $room['sector'] % 26;
-    } else {
-        $shift = $room['sector'];
-    }
+    $shift = $room['sector'] % 26;
     
     $decrypted = '';
     
+    // shift each character
     foreach ($chars as $char) {
-        $pos = $charToPos[$char] + $shift;
-        $pos = $pos > 25 ? $pos % 26 : $pos;
+        $pos = ($charToPos[$char] + $shift) % 26;
         $decrypted .= $posToChar[$pos];
     }
     
