@@ -53,26 +53,3 @@ foreach ($lines as $line) {
 }
 
 printf('ans#7.2: %u'.PHP_EOL, $count);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
