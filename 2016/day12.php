@@ -1,13 +1,18 @@
 <?php
 
 $input = file_get_contents('day12.txt');
-$stack = array_filter(array_map('trim', explode(PHP_EOL, $input)));
+$lines = array_filter(array_map('trim', explode(PHP_EOL, $input)));
 
-function compute($stack, array $defaults = []) {
+$stack =[];
+foreach ($lines as  $line) {
+    $stack[] = explode(' ', $line);
+}
+
+function compute(array $stack, array $defaults = []) {
     $regs = $defaults + array_fill_keys(range('a', 'd'), 0);
     $i = 0;
     while ($i < count($stack)) {
-        $parts = explode(' ', $stack[$i]);
+        $parts = $stack[$i];
         
         switch ($parts[0]) {
             case 'cpy': 
@@ -23,7 +28,6 @@ function compute($stack, array $defaults = []) {
                 }
                 break;
         }
-        
         $i++;
     }
     
