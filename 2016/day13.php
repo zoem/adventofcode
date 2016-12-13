@@ -9,8 +9,8 @@ $maze = function($x, $y) use ($input) {
 
 function findMin(Closure $maze, array $start, $end) {   
     $visited[implode(';', $start)] = true;
-    $i = $t = 1;
     $states = [$start];
+    $i = 1;
     
     while (count($states) > 0 && (is_array($end) || $i <= $end)) {
         $newStates = [];
@@ -31,7 +31,6 @@ function findMin(Closure $maze, array $start, $end) {
                 } else {
                     $newStates[] = $new;
                     $visited[$key] = true;
-                    $t++;
                     
                     if (is_array($end) && $new[0] == $end[0] && $new[1] == $end[1]) {
                         break 3; // stop when $end is a coordinate and it matches $new
