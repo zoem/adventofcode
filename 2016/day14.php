@@ -7,7 +7,7 @@ function get64thKey($salt, $stretches = 0) {
     $triplets = $found = [];
     
     // loop until the 64 lowest(!) keys have been found
-    while (count($found) < 64 || (count($found) >= 63 && min(array_keys($triplets)) < $found[63])) {
+    while (count($found) < 64 || (isset($found[63]) && min(array_keys($triplets)) < $found[63])) {
         
         $hash = md5($salt . $i);
         
@@ -33,7 +33,6 @@ function get64thKey($salt, $stretches = 0) {
         // find possible triplet in current hash
         if (preg_match('#(?<set>([a-z0-9])\\2{2,}?)#', $hash, $match)) {
             $triplets[$i] = $match['set'][0];
-            printf('#%u: %s (%s)' . PHP_EOL, $i, $match['set'], $hash);
         }
         
         $i++;
