@@ -39,7 +39,7 @@ function compute(array $stack, array $defaults = []) {
                 if (isset($reg[$parts[1]])) {
                     $a = isset($reg[$parts[2]]) ? $reg[$parts[2]] : $parts[2];
                     $b = isset($reg[$parts[3]]) ? $reg[$parts[3]] : $parts[3];
-                    $reg[$parts[1]] = $a * $b;
+                    $reg[$parts[1]] += $a * $b;
                 }
                 break;
             case 'inc': if (isset($reg[$parts[1]])) $reg[$parts[1]]++; break;
