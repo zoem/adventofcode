@@ -34,5 +34,20 @@ foreach ($nodes as $a) {
     }
 }
 
+$grid = [];
+foreach ($nodes as $node) {
+    $v = '.';
+    if ($node['a'] < 10) {
+        $v = '#';
+    } elseif ($node['u'] == 0) {
+        $v = 'E';
+    }
+    $grid[$node['y']][$node['x']] = $v;
+}
+
+foreach ($grid as $row) {
+    echo implode('', $row).PHP_EOL;
+}
+
 printf('ans#22.1: %s'.PHP_EOL, $sum);
 printf('ans#22.2: %s'.PHP_EOL, $empty['x'] + $empty['y'] + $maxX + ($maxX - 1) * 5);
