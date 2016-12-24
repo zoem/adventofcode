@@ -15,25 +15,23 @@ function getSteps(array $grid, array $a, array $b) {
         
         foreach ($states as $state) {
             foreach ($directions as $direction) {
-                $newState = $state;
                 $x = $state[0] + $direction[0];
                 $y = $state[1] + $direction[1];
                 
-                if ($grid[$y][$x] == '#' || $y < 0 || $x < 0) {
-                    continue; // wall or out of bounds
+                if (isset($seen[$x][$y])) {
+                    continue; // already visited
                 }
                 
-                $key = "$x|$y";
-                if (isset($seen[$key])) {
-                    continue; // already visited
+                if ($grid[$y][$x] == '#') {
+                    continue; // wall or out of bounds
                 }
                 
                 if ($x == $b[0] && $y == $b[1]) {
                     return $steps; // shortest path
                 }
                 
-                $seen[$key]  = true;
-                $newStates[] = [$x, $y];
+                $seen[$x][$y] = true;
+                $newStates[]  = [$x, $y];
             }
         }
         
@@ -61,7 +59,7 @@ function getShortestPath($start, array $steps, array $points, $return = false) {
         
         $distances[] = $distance;
     }
-    
+
     return min($distances);
 }
 
