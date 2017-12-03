@@ -42,9 +42,7 @@ do {
     foreach ($deltas as $delta) {
         $y1 = $y + $delta[0];
         $x1 = $x + $delta[1];
-        if (isset($grid[$y1][$x1])) {
-            $sum += $grid[$y1][$x1];
-        }
+        $sum += $grid[$y1][$x1] ?? 0;
     }
     
     $grid[$y][$x] = $sum;
