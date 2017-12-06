@@ -31,4 +31,4 @@ while ($hash !== $match) {
 } 
 
 printf('ans#6.1: %d'.PHP_EOL, $cycles1);
-printf('ans#6.1: %d'.PHP_EOL, $cycles2 - $cycles1);
+printf('ans#6.2: %d'.PHP_EOL, $cycles2 - $cycles1);
