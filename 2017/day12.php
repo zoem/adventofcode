@@ -22,10 +22,6 @@ while (count($remaining)) {
     while (count($groups[$start]) != $count) {
         $count = count($groups[$start]);
         foreach ($programs as $num => $deps) {
-            // skip existing
-            if (isset($groups[$start][$num])) {
-                continue;
-            }
             // add to the current group when they are related
             if (array_intersect_key($deps, $groups[$start])) {
                 $groups[$start][$num] = $num;
