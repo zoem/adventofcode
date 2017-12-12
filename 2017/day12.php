@@ -7,7 +7,7 @@ $lines = explode(PHP_EOL, $input);
 // use array keys instead of values, since it is much faster
 $programs = [];
 foreach ($lines as $line) {
-    $parts = preg_match_all('~\d+~', $line, $matches);
+    preg_match_all('~\d+~', $line, $matches);
     $key = array_shift($matches[0]);
     $programs[$key] = array_fill_keys($matches[0], true);
 }
