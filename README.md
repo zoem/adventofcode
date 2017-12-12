@@ -6,3 +6,4 @@ Advent of Code is a series of small programming puzzles for a variety of skill l
 
 * AoC 2015: PHP >= 5.5
 * AoC 2016: PHP >= 7.0
+* AoC 2017: PHP >= 7.0
