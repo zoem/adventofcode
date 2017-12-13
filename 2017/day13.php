@@ -13,6 +13,13 @@ function solve(array $layers, $delay, $breakOnCaught) {
     $severity = 0;
     
     foreach ($layers as $depth => $range) {
+        /* 
+         * Example of a layer with range 4:
+         *   position: 1 2 3 4 3 2 1 2 3 4 3 2 1
+         *   pattern:  1 2 3 4 5 6 1 2 3 4 5 6 1 (2 * range - 2)
+         * After each 6 steps the scanner is at the top again
+         * So when the depth (+ delay) coincides with the repeating pattern of 6 you are caught
+         */
         $mod = ($depth + $delay) % (2 * $range - 2);
         
         if ($mod == 0 && $breakOnCaught) {
