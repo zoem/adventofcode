@@ -12,12 +12,13 @@ foreach ($lines as $line) {
 $divs = [16807, 48271];
 
 $count = 0;
+$values = $gens;
 for ($i=0; $i<40E6; $i++) {
     $pair = [];
 
-    foreach ($gens as $k => $v) {
-        $gens[$k] = ($v * $divs[$k]) % 2147483647;
-        $pair[substr(decbin($gens[$k]), -16)] = true;
+    foreach ($values as $k => $v) {
+        $values[$k] = ($v * $divs[$k]) % 2147483647;
+        $pair[substr(decbin($values[$k]), -16)] = true;
     }
     
     if (count($pair) == 1) {
@@ -31,15 +32,16 @@ printf('ans#15.1: %d'.PHP_EOL, $count);
 
 $mods = [4, 8];
 $count = 0;
+$values = $gens;
 for ($i=0; $i<5E6; $i++) {
     $pair = [];
     
-    foreach ($gens as $k => $v) {
+    foreach ($values as $k => $v) {
         do {
-            $gens[$k] = ($gens[$k] * $divs[$k]) % 2147483647;
-        } while ($gens[$k] % $mods[$k] != 0);
+            $values[$k] = ($values[$k] * $divs[$k]) % 2147483647;
+        } while ($values[$k] % $mods[$k] != 0);
 
-        $pair[substr(decbin($gens[$k]), -16)] = true;
+        $pair[substr(decbin($values[$k]), -16)] = true;
     }
     
     if (count($pair) == 1) {
