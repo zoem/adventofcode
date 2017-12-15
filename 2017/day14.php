@@ -113,5 +113,5 @@ for ($i=0; $i<=127; $i++) {
     $sum += count(array_filter($map[$i]));
 }
 
-printf('ans#10.1: %s'.PHP_EOL, $sum);
-printf('ans#10.1: %s'.PHP_EOL, max(explore($map)));
+printf('ans#14.1: %s'.PHP_EOL, $sum);
+printf('ans#14.2: %s'.PHP_EOL, max(explore($map)));
