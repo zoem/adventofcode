@@ -56,7 +56,6 @@ $vars = array_fill(0, 2, array_fill_keys(range('a', 'z'), 0));
 $vars[0]['p'] = 0;
 $vars[1]['p'] = 1;
 
-$foo = [];
 do {
     for ($p=0; $p<2; $p++) {
         $i = $ii[$p];
