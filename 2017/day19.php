@@ -33,7 +33,7 @@ do {
         $c[1] + $d[1],
     ];
     
-    $char = $grid[$c[1]][$c[0]] ?? null;
+    $char = trim($grid[$c[1]][$c[0]] ?? null);
     
     if (ctype_upper($char)) {
         // encountered an alphabetic char, log it
@@ -53,13 +53,13 @@ do {
 
             $nextChar = trim($grid[$next[1]][$next[0]] ?? null);
 
-            if (!empty(trim($nextChar))) {
+            if (!empty($nextChar)) {
                 $d = $direction;
                 break;
             }
         }
     }
-} while (!empty(trim($char)));
+} while (!empty($char));
 
 printf('ans#19.1: %s'.PHP_EOL, implode($log));
 printf('ans#19.2: %d'.PHP_EOL, $i);
