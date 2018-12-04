@@ -7,9 +7,7 @@ $seen = [];
 $sum = $i = 0;
 
 do {
-    if ($i > 0) {
-        $seen[$sum] = true;
-    }
+    $seen[$sum] = true;
 
     $sum += (int) $lines[$i];
     $i = ($i + 1) % count($lines);
